@@ -28,7 +28,7 @@ size_t getNumberEnd(char matrix[COLUMNS], size_t start) {
   size_t counter = start;
 
   // If first char is not a digit, then this is not even a number.
-  if (!isdigit(matrix[counter++])) {
+  if (!isdigit(matrix[counter])) {
     return -1;
   }
 
@@ -110,9 +110,11 @@ int main(void) {
       int end = getNumberEnd(matrix[line], column);
       if (end != -1) {
         if (haveNeighboringSymbol(matrix, line, column, end)) {
-          char* str = (char*)(malloc((end - column + 1) * sizeof(char)));
+          char *str = (char *)(malloc((end - column + 1) * sizeof(char)));
           strncpy(str, matrix[line] + column, end - column);
+          str[end - column] = '\0';
           sum += atoi(str);
+          free(str);
         }
         column = end;
       } else {
