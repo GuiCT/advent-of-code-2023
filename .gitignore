@@ -4,3 +4,4 @@ target/
 input.txt
 .vscode/
 node_modules/
+venv/
